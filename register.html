@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل حساب جديد</title>
+    <title>إنشاء حساب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* إعدادات عامة للصفحة */
@@ -113,7 +113,7 @@
     <div class="register-container">
         <h1>مرحبا بك!</h1>
         <p>سجل معنا للتعرف على مميزات التطبيق</p>
-        <form id="registerForm" method="POST" action="/register">
+        <form id="registerForm" method="POST" action="/register" onsubmit="showConfirmation(event)">
             <label for="fullName">الاسم الكامل:</label>
             <input type="text" id="fullName" name="fullName" required />
             
@@ -129,9 +129,20 @@
             <button type="submit">تسجيل</button>
         </form>
 
-        <p>تم تسجيل حسابك بنجاح! <br> الرجاء التوجه إلى بريدك الإلكتروني لتفعيل حسابك.</p>
-        <p><a href="/activate" style="color: #00897B; font-weight: bold;">اضغط هنا لتفعيل حسابك</a></p>
+        <!-- رسالة التفعيل -->
+        <div id="confirmationMessage" style="display:none;">
+            <p>تم تسجيل حسابك بنجاح! <br> الرجاء التوجه إلى بريدك الإلكتروني لتفعيل حسابك.</p>
+            <p><a href="/activate" style="color: #00897B; font-weight: bold;">اضغط هنا لتفعيل حسابك</a></p>
+        </div>
     </div>
+
+    <script>
+        function showConfirmation(event) {
+            event.preventDefault(); // منع إرسال النموذج مؤقتاً
+            document.getElementById('registerForm').style.display = 'none'; // إخفاء النموذج
+            document.getElementById('confirmationMessage').style.display = 'block'; // عرض رسالة التفعيل
+        }
+    </script>
 
 </body>
 </html>
