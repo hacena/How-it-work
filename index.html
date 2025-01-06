@@ -92,15 +92,51 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        .auth-links a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 15px;
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            color: #388E3C;
+        }
+
+        .video-container {
+            margin: 40px 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+        }
+
     </style>
 </head>
 <body>
     <header>
-أهلابكم ..    </header>
+        صفحة البيع
+    </header>
 
     <div class="container">
         <h1>اختر وسيلة الدفع المناسبة</h1>
         <p>يمكنك الدفع عبر PayPal أو CCP بطريقة آمنة وسهلة.</p>
+
+        <!-- روابط التسجيل وتسجيل الدخول -->
+        <div class="auth-links">
+            <a href="register.html">تسجيل حساب جديد</a> | 
+            <a href="login.html">تسجيل الدخول</a>
+        </div>
+
+        <!-- فيديو يشرح كيفية عمل التطبيق -->
+        <div class="video-container">
+            <h2>شاهد كيف يعمل التطبيق</h2>
+            <iframe src="path-to-your-video.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
 
         <div class="payment-options">
             <a href="paypalpay.html" class="paypal">الدفع عبر PayPal</a>
@@ -109,9 +145,6 @@
     </div>
 
     <footer>
-        <a href="register.html">تسجيل حساب جديد</a> | 
-        <a href="login.html">تسجيل الدخول</a>
-        <br>
         <a href="about-us.html">من نحن</a> | 
         <a href="privacy-policy.html">سياسة الخصوصية</a> | 
         <a href="return-policy.html">سياسة الإرجاع</a> | 
