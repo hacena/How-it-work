@@ -1,10 +1,13 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const path = require('path');
 const app = express();
 const port = 3000;
 
 // استخدام JSON لتحليل الطلبات
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public')); // لتقديم الملفات الثابتة (CSS, HTML)
 
 // الصفحة الرئيسية
 app.get('/', (req, res) => {
@@ -15,8 +18,8 @@ app.get('/', (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'your-email@gmail.com', // ضع بريدك الإلكتروني
-    pass: 'your-email-password'   // ضع كلمة المرور الخاصة بك أو "App Password"
+    user: 'your-email@gmail.com', // بريدك الإلكتروني
+    pass: 'your-email-password'   // كلمة المرور الخاصة بك أو "App Password"
   }
 });
 
@@ -24,12 +27,10 @@ const transporter = nodemailer.createTransport({
 app.post('/register', (req, res) => {
   const { fullName, email, username, password } = req.body;
 
-  // التحقق من البيانات المدخلة
   if (!fullName || !email || !username || !password) {
     return res.status(400).send('يرجى إدخال جميع البيانات المطلوبة!');
   }
 
-  // إعداد البريد الإلكتروني
   const mailOptions = {
     from: 'your-email@gmail.com',
     to: email,
@@ -37,7 +38,17 @@ app.post('/register', (req, res) => {
     text: `مرحباً ${fullName},\n\nتم تسجيلك في التطبيق باستخدام اسم المستخدم: ${username}.\n\nكلمة المرور الخاصة بك هي: ${password}`
   };
 
-  // إرسال البريد الإلكتروني
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('
+      console.error('خطأ أثناء إرسال البريد:', error);
+      return res.status(500).send('فشل في إرسال البريد الإلكتروني. الرجاء المحاولة مرة أخرى لاحقًا.');
+    }
+    console.log('رسالة تم إرسالها: ' + info.response);
+    res.redirect('/confirmation.html'); // توجيه المستخدم إلى صفحة التأكيد
+  });
+});
+
+// تشغيل الخادم
+app.listen(port, () => {
+  console.log(`🚀 التطبيق يعمل على: http://localhost:${port}`);
+});
