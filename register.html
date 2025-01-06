@@ -6,49 +6,129 @@
     <title>تسجيل حساب جديد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* إعدادات عامة للصفحة */
         body {
             font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
             background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* الإطار الرئيسي */
+        .register-container {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 40px 50px;
+            max-width: 600px;
+            width: 90%;
             text-align: center;
+            border: 2px solid #00897B;
+            box-sizing: border-box;
         }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        /* العنوان الرئيسي */
+        .register-container h1 {
+            font-size: 2.5rem;
+            color: #00897B;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
-        .container input {
+
+        /* العبارة الترحيبية */
+        .register-container p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* الحقول */
+        .register-container label {
+            display: block;
+            font-size: 1.1rem;
+            text-align: right;
+            margin: 15px 0 5px;
+            font-weight: 700;
+        }
+
+        .register-container input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 15px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: border-color 0.3s;
         }
-        .container button {
+
+        .register-container input:focus {
+            border-color: #00897B;
+        }
+
+        /* زر التسجيل */
+        .register-container button {
             background-color: #00897B;
             color: white;
-            padding: 10px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
         }
-        .container button:hover {
+
+        .register-container button:hover {
             background-color: #00695C;
+        }
+
+        /* تحسين على الهواتف */
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 20px;
+            }
+
+            .register-container h1 {
+                font-size: 2rem;
+            }
+
+            .register-container p {
+                font-size: 1.1rem;
+            }
+
+            .register-container button {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>سجل معنا الآن!</h2>
-        <form action="/register" method="POST">
-            <input type="text" name="fullName" placeholder="الاسم الكامل" required />
-            <input type="email" name="email" placeholder="البريد الإلكتروني" required />
-            <input type="text" name="username" placeholder="اسم المستخدم" required />
-            <input type="password" name="password" placeholder="كلمة المرور" required />
+
+    <div class="register-container">
+        <h1>مرحبا بك!</h1>
+        <p>سجل معنا للتعرف على مميزات التطبيق</p>
+        <form id="registerForm" method="POST" action="/register">
+            <label for="fullName">الاسم الكامل:</label>
+            <input type="text" id="fullName" name="fullName" required />
+            
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required />
+            
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" name="username" required />
+            
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" name="password" required />
+            
             <button type="submit">تسجيل</button>
         </form>
     </div>
+
 </body>
 </html>
