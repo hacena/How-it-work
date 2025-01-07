@@ -129,7 +129,36 @@
             
             <button type="submit">تسجيل</button>
         </form>
+        
+        <p id="confirmationMessage" style="color: green; font-weight: bold;"></p>
     </div>
+
+    <script>
+        // إضافة رسالة تأكيد عند التسجيل بنجاح
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // منع إرسال النموذج بشكل تقليدي
+            
+            // إرسال بيانات النموذج إلى الخادم باستخدام fetch
+            const formData = new FormData(this);
+            fetch('/register', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('confirmationMessage').textContent = 'تم التسجيل بنجاح! تحقق من بريدك الإلكتروني لتفعيل حسابك.';
+                    document.getElementById('confirmationMessage').style.color = 'green';
+                } else {
+                    document.getElementById('confirmationMessage').textContent = 'حدث خطأ أثناء التسجيل. يرجى المحاولة لاحقًا.';
+                    document.getElementById('confirmationMessage').style.color = 'red';
+                }
+            })
+            .catch(error => {
+                document.getElementById('confirmationMessage').textContent = 'حدث خطأ أثناء الاتصال بالخادم. يرجى المحاولة لاحقًا.';
+                document.getElementById('confirmationMessage').style.color = 'red';
+            });
+        });
+    </script>
 
 </body>
 </html>
