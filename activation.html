@@ -1,0 +1,21 @@
+app.post('/register', (req, res) => {
+    const { fullName, email, username, password } = req.body;
+    console.log('Received data:', { fullName, email, username, password }); // تحقق من البيانات هنا
+
+    const msg = {
+        to: email,
+        from: 'your-email@example.com',
+        subject: 'تسجيل حساب جديد',
+        text: `مرحباً ${fullName},\n\nلقد قمت بالتسجيل بنجاح في تطبيقنا. نرجو منك تفعيل حسابك عبر الرابط أدناه.\n\nرابط التفعيل: </https://hacena.github.io/How-it-work/activate.htmlافكم`,
+        html: `<p>مرحباً ${fullName},</p><p>لقد قمت بالتسجيل بنجاح في تطبيقنا. نرجو منك تفعيل حسابك عبر الرابط أدناه.</p><p><a href="hacena.github.io/How-it-work/activate.html
+
+    sgMail
+        .send(msg)
+        .then(() => {
+            res.status(200).send('تم إرسال رسالة التفعيل');
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('حدث خطأ أثناء إرسال الرسالة');
+        });
+});
